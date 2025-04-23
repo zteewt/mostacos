@@ -1,0 +1,142 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static '/css/styles.css' %}">
+    <link rel="stylesheet" href="{% static '/css/auth.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bevan:ital@0;1&family=Irish+Grover&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>Mo's Tacos - Корзина</title>
+</head>
+<body>
+    <header>
+        <img class="logo_img" src="{% static 'images/лого 2-Photoroom 1 (1).png' %}" alt="Логотип Mo's Tacos">
+        <a href="{% url 'index' %}" class="logo-link">
+            <div id='menu' class="logo">Mo's Tacos</div>
+        </a>
+        <nav>
+            <a href="{% url 'cart' %}" class="nav-item" id="basket">КОРЗИНА</a>
+            <a href="#contacts">КОНТАКТЫ</a>
+            {% if user.is_authenticated %}
+            <a href="{% url 'login' %}" class="nav-item" id="login">{{ user.username }}</a>
+            {% else %}
+            <a href="{% url 'login' %}" class="nav-item" id="login">ВХОД</a>
+            {% endif %}
+        </nav>
+    </header>
+
+    <main class="cart-page">
+        <h2 class="cart-title"><i class="fas fa-shopping-cart"></i> Ваша корзина</h2>
+        
+        {% if cart.items.all %}
+            <div class="cart-table-container">
+                <table class="cart-table">
+                    <thead>
+                        <tr>
+                            <th class="dish-col">Блюдо</th>
+                            <th class="quantity-col">Кол-во</th>
+                            <th class="price-col">Цена</th>
+                            <th class="total-col">Сумма</th>
+                            <th class="actions-col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in cart.items.all %}
+                        <tr class="cart-item">
+                            <td class="dish-cell">
+                                {% if item.dish.image %}
+                                <img src="{{ item.dish.image.url }}" alt="{{ item.dish.name }}" class="dish-image">
+                                {% endif %}
+                                <span class="dish-name">{{ item.dish.name }}</span>
+                            </td>
+                            <td class="quantity-cell">
+                                <div class="quantity-control">
+                                    <form action="{% url 'decrease_quantity' item.id %}" method="post">
+                                        {% csrf_token %}
+                                        <button type="submit" class="qty-btn minus-btn">-</button>
+                                    </form>
+                                    <span class="quantity-value">{{ item.quantity }}</span>
+                                    <form action="{% url 'increase_quantity' item.id %}" method="post">
+                                        {% csrf_token %}
+                                        <button type="submit" class="qty-btn plus-btn">+</button>
+                                    </form>
+                                </div>
+                            </td>
+                            <td class="price-cell">{{ item.dish.price }} ₽</td>
+                            <td class="total-cell">{{ item.get_total }} ₽</td>
+                            <td class="actions-cell">
+                                <form action="{% url 'remove_from_cart' item.id %}" method="post">
+                                    {% csrf_token %}
+                                    <button type="submit" class="remove-btn">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="cart-summary">
+                <div class="total-section">
+                    <span class="total-label">Итого:</span>
+                    <span class="total-amount">{{ cart.get_total }} ₽</span>
+                </div>
+                
+                <div class="cart-actions">
+                    <a href="{% url 'index' %}" class="continue-shopping-btn">
+                        <i class="fas fa-chevron-left"></i> Продолжить покупки
+                    </a>
+                    <a href="{% url 'checkout' %}" class="checkout-btn">
+                        <i class="fas fa-credit-card"></i> Оформить заказ
+                    </a>
+                </div>
+            </div>
+        {% else %}
+            <div class="empty-cart">
+                <i class="fas fa-shopping-basket empty-cart-icon"></i>
+                <p class="empty-message">Ваша корзина пуста</p>
+                <a href="{% url 'index' %}" class="back-to-menu-btn">
+                    <i class="fas fa-utensils"></i> Перейти в меню
+                </a>
+            </div>
+        {% endif %}
+    </main>
+
+    <footer>
+        <div id='contacts' class="footer-title">
+            <h1>ПРИЯТНОГО АППЕТИТА</h1>
+        </div>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h2>АДРЕС:</h2>
+                <p>БОЛЬШАЯ САДОВАЯ., 17,<br>
+                   ВОРОШИЛОВСКИЙ., 1,<br>
+                </p>
+            </div>
+            <div class="footer-section">
+                <h2>ЧАСЫ РАБОТЫ:</h2>
+                <p>ПН-СР 12:00-00:00<br>
+                   ЧТ 12:00-05:00<br>
+                   ПТ-СБ 12:00-06:00<br>
+                   ВС 12:00-00:00</p>
+            </div>
+            <div class="footer-section">
+                <h2>КОНТАКТЫ:</h2>
+                <p>ТЕЛЕФОН: 8-888-888-88-88<br>
+                   EMAIL: MOSTACOS@GMAIL.COM</p>
+            </div>
+            <div class="footer-button">
+                <a href="#menu" class="menu_button">В МЕНЮ ↺</a>
+            </div>
+        </div> 
+    </footer>
+    
+</body>
+</html>

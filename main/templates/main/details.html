@@ -1,0 +1,129 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static '/css/styles.css' %}">
+    <link rel="stylesheet" href="{% static '/css/auth.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bevan:ital@0;1&family=Irish+Grover&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>Mo's Tacos</title>
+</head>
+<body>
+    <header>
+        <img class="logo_img" src="{% static 'images/лого 2-Photoroom 1 (1).png' %}" alt="">
+        <a href="{% url 'index' %}" class="logo-link">
+            <div id='menu' class="logo">Mo's Tacos</div>
+        </a>
+        <nav>
+            <a href="{% url 'cart' %}" class="nav-item" id="basket">КОРЗИНА</a>
+            <a href="#contacts">КОНТАКТЫ</a>
+            {% if user.is_authenticated %}
+            <a href="{% url 'login' %}" class="nav-item" id="login">{{ user.username }}</a>
+            {% else %}
+            <a href="{% url 'login' %}" class="nav-item" id="login">ВХОД</a>
+            {% endif %}
+        </nav>
+
+    </header>
+   <main>
+    <div class="order-details">
+        <h2>Заказ {{ order_number }} из {{ total_orders }} ({{ order.get_status_display }})</h2>
+        
+        <div class="order-info">
+            <div class="info-row">
+                <p><strong><i class="far fa-calendar-alt"></i> Дата:</strong> {{ order.created_at|date:"d.m.Y H:i" }}</p>
+                <p><strong><i class="fas fa-info-circle"></i> Статус:</strong> 
+                    <span class="badge 
+                        {% if order.status == 'completed' %}bg-success
+                        {% elif order.status == 'cancelled' %}bg-danger
+                        {% else %}bg-warning{% endif %}">
+                        {{ order.get_status_display }}
+                    </span>
+                </p>
+                <p><strong><i class="fas fa-money-bill-wave"></i> Оплата:</strong> {{ order.get_payment_method_display }}</p>
+                <p><strong><i class="fas fa-ruble-sign"></i> Итого:</strong> {{ order.total_price }} ₽</p>
+            </div>
+            
+            <div class="info-row">
+                <p><strong><i class="fas fa-map-marker-alt"></i> Адрес доставки:</strong> {{ order.delivery_address }}</p>
+                <p><strong><i class="fas fa-phone"></i> Телефон:</strong> {{ order.phone }}</p>
+            </div>
+        </div>
+    
+        <div class="order-items">
+            <h3><i class="fas fa-utensils"></i> Состав заказа</h3>
+            <table class="order-table">
+                <thead>
+                    <tr>
+                        <th>Блюдо</th>
+                        <th>Количество</th>
+                        <th>Цена</th>
+                        <th>Сумма</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in order.items.all %}
+                    <tr>
+                        <td>
+                            {% if item.dish %}
+                                {{ item.dish.name }}
+                            {% else %}
+                                <span style="color: #999;">[Блюдо удалено]</span>
+                            {% endif %}
+                        </td>
+                        <td>{{ item.quantity }}</td>
+                        <td>{{ item.price_at_order }} ₽</td>
+                        <td>{{ item.get_total }} ₽</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th colspan="3">Общая сумма:</th>
+                        <th>{{ order.total_price }} ₽</th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    
+        <a href="{% url 'order_history' %}" class="back-btn">
+            <i class="fas fa-arrow-left"></i> Вернуться к истории заказов
+        </a>
+    </div>
+   </main>
+    <footer>
+        <div id='contacts' class="footer-title">
+            <h1>ПРИЯТНОГО АППЕТИТА</h1>
+        </div>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h2>АДРЕС:</h2>
+                <p>БОЛЬШАЯ САДОВАЯ., 17,<br>
+                   ВОРОШИЛОВСКИЙ., 1,<br>
+                </p>
+            </div>
+            <div class="footer-section">
+                <h2>ЧАСЫ РАБОТЫ:</h2>
+                <p>ПН-СР 12:00-00:00<br>
+                   ЧТ 12:00-05:00<br>
+                   ПТ-СБ 12:00-06:00<br>
+                   ВС 12:00-00:00</p>
+            </div>
+            <div class="footer-section">
+                <h2>КОНТАКТЫ:</h2>
+                <p>ТЕЛЕФОН: 8-888-888-88-88<br>
+                   EMAIL: MOSTACOS@GMAIL.COM</p>
+            </div>
+            <div class="footer-button">
+                <a href="#menu" class="menu_button">В МЕНЮ ↺</a>
+        </div>
+   </div> 
+</footer>
+
+</body>
+</html>

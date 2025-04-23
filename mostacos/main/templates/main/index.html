@@ -1,0 +1,178 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static '/css/styles.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bevan:ital@0;1&family=Irish+Grover&display=swap" rel="stylesheet">
+    <title>Mo's Tacos</title>
+</head>
+<body>
+    <header>
+        <img class="logo_img" src="{% static 'images/лого 2-Photoroom 1 (1).png' %}" alt="">
+        <div id='menu' class="logo">Mo's Tacos</div>
+        <nav>
+            <a href="#" class="nav-item" id="basket">КОРЗИНА</a>
+            <a href="#contacts">КОНТАКТЫ</a>
+            <a href="#" class="nav-item" id="login">ВХОД</a>
+        </nav>
+        <div class="popup" id="popup">
+            <h2>КОРЗИНА</h2>
+            <div id="basketContent">
+            </div>
+        <button id="checkout">Заказать</button>
+        </div>
+        <div class="overlay" id="overlay"></div>
+
+        <div class="login-popup" id="loginPopup">
+            <h2>ВХОД</h2>
+            <input type="text" id="username" placeholder="Введите логин">
+            <input type="password" id="password" placeholder="Введите пароль">
+            <button class="button" id="loginButton">Войти в аккаунт</button>
+            <div id="loginMessage" class="success-message"></div>
+            <div class="registration-link" id="showRegistration">Регистрация</div>
+        </div>
+
+        <!-- Всплывающее окно для регистрации -->
+        <div class="register-popup" id="registerPopup">
+            <h2>Регистрация</h2>
+            <input type="text" id="registerUsername" placeholder="Придумайте логин">
+            <input type="password" id="registerPassword" placeholder="Придумайте пароль">
+            <button class="button" id="registerButton">Зарегистрироваться</button>
+        </div>
+        <div class="overlay" id="overlay"></div>
+    </header>
+    <div class="hero-section">
+        <h1> МЕНЮ </h1>
+        <div class="menu-buttons">
+            <a href="#tacos"><button>Tacos</button></a>
+            <a href="#burritos"><button>Burritos</button></a>
+            <a href="#nachos"><button>Nachos</button></a>
+            <a href="#burgers"><button>Burgers</button></a>
+            <a href="#sauces"><button>Sauces</button></a>
+            <a href="#drinks"><button>Drinks</button></a>
+        </div>
+    </div>
+    <main>  
+        
+
+        <div class="category-block" style="background-image: url('/static/images/photo_2024-12-14_00-54-50.jpg');">
+        <div id="tacos" class="category">Tacos</div>
+        <div class="menu-grid">
+            {% for dish in tacos %}
+            <div class="menu-item" data-price="{{ dish.price }}">
+                <h3>{{ dish.name }}</h3>
+                <img class="image1" src="{{ dish.image }}" />
+                <p>{{ dish.description }}</p>
+                <button class="order-button">{{ dish.price }}</button>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="category-block" style="background-image: url('/static/images/background1.jpg');">
+        <div id="burritos" class="category">Burritos</div>
+        <div class="menu-grid">
+            {% for dish in burritos %}
+            <div class="menu-item" data-price="{{ dish.price }}">
+                <h3>{{ dish.name }}</h3>
+                <img class="image1" src="{{ dish.image }}" />
+                <p>{{ dish.description }}</p>
+                <button class="order-button">{{ dish.price }}</button>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+    <div class="category-block" style="background-image: url('/static/images/Airbrush-3776327d4557ac78db343aeb46c49936\ 1.jpg');">
+        <div id='nachos' class="category">Nachos</div>
+        <div class="menu-grid">
+            {% for dish in nachos %}
+            <div class="menu-item" data-price="{{ dish.price }}">
+                <h3>{{ dish.name }}</h3>
+                <img class="image1" src="{{ dish.image }}" />
+                <p>{{ dish.description }}</p>
+                <button class="order-button">{{ dish.price }}</button>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="category-block" style="background-image: url('/static/images/Airbrush-bb81e218d8067bf927fce644975082ba\ 2.jpg');">
+        <div id="burgers" class="category">Burgers</div>
+        <div class="menu-grid">
+            {% for dish in burgers %}
+            <div class="menu-item" data-price="{{ dish.price }}">
+                <h3>{{ dish.name }}</h3>
+                <img class="image1" src="{{ dish.image }}" />
+                <p>{{ dish.description }}</p>
+                <button class="order-button">{{ dish.price }}</button>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="category-block" style="background-image: url('/static/images/Airbrush-World___USA_Beauty_of_of_Utah__USA_059348_\ 2.jpg');">
+        <div id='sauces' class="category">Sauces</div>
+        <div class="menu-grid">
+            {% for dish in sauces %}
+            <div class="menu-item" data-price="{{ dish.price }}">
+                <h3>{{ dish.name }}</h3>
+                <img class="image1" src="{{ dish.image }}" />
+                <p>{{ dish.description }}</p>
+                <button class="order-button">{{ dish.price }}</button>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="category-block" style="background-image: url('/static/images/Airbrush-bb81e218d8067bf927fce644975082ba\ 2.jpg');">
+        <div id="drinks" class="category">Drinks</div>
+        <div class="menu-grid">
+            {% for dish in drinks %}
+            <div class="menu-item" data-price="{{ dish.price }}">
+                <h3>{{ dish.name }}</h3>
+                <img class="image1" src="{{ dish.image }}" />
+                <p>{{ dish.description }}</p>
+                <button class="order-button">{{ dish.price }}</button>
+            </div>
+            {% endfor %}
+        </div>
+    </main>
+    <footer>
+        <div id='contacts' class="footer-title">
+            <h1>ПРИЯТНОГО АППЕТИТА</h1>
+        </div>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h2>АДРЕС:</h2>
+                <p>БОЛЬШАЯ САДОВАЯ., 17,<br>
+                   ВОРОШИЛОВСКИЙ., 1,<br>
+                </p>
+            </div>
+            <div class="footer-section">
+                <h2>ЧАСЫ РАБОТЫ:</h2>
+                <p>ПН-СР 12:00-00:00<br>
+                   ЧТ 12:00-05:00<br>
+                   ПТ-СБ 12:00-06:00<br>
+                   ВС 12:00-00:00</p>
+            </div>
+            <div class="footer-section">
+                <h2>КОНТАКТЫ:</h2>
+                <p>ТЕЛЕФОН: 8-888-888-88-88<br>
+                   EMAIL: MOSTACOS@GMAIL.COM</p>
+            </div>
+            <div class="footer-button">
+                <a href="#menu" class="menu_button">В МЕНЮ ↺</a>
+        </div>
+   </div> 
+</footer>
+<script src="{% static '/js/basket.js' %}"></script>
+    <script src="{% static '/js/logpass.js' %}"></script>
+</body>
+</html>

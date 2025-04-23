@@ -1,0 +1,614 @@
+@font-face {
+    font-family: 'Westerland';
+    src: url('/static/fonts/westerlandc_normal.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+html{
+    scroll-behavior: smooth;
+}
+
+/* Общие стили */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+    /* background-image: url('../css/backgroundcss.jpg'); /* Замените 'path/to/your/image.jpg' на путь к вашей картинке */
+    background-size: cover; /* Заставляет изображение заполнять весь элемент */
+    background-position: center; /* Центрирует изображение */
+    background-repeat: no-repeat; /* Не повторяет изображение */
+}
+
+.logo {
+    margin-right: 1050px;
+    text-align: left;
+    font-size: 24px;
+}
+
+header {
+    background-color:rgba(0,0,0, 0.9)   ;/* Цвет шапки */
+    color: #333;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+}
+
+header .logo {
+    font-family: 'Irish Grover', cursive; /* Шрифт для логотипа */
+    font-weight: bold;
+    color: #FFFFFF;
+    
+}
+
+nav {
+    display: flex;
+    gap: 15px;
+}
+
+header a{
+    font-family: 'Westerland';
+    letter-spacing: 1.5px;
+    font-size: 20px;
+}
+
+nav a {
+    color: #FFFFFF;
+    text-decoration: none;
+    margin-left: 20px;
+    transition: color 0.3s;
+}
+
+nav a:hover {
+    text-decoration: underline;
+    color: #ffcc00;
+}
+
+main {
+    text-align: center;
+}
+
+h1 {
+    font-size: 48px;
+    font-family: 'Westerland', sans-serif; /* Шрифт для заголовка "Меню" */
+    color: #000000;
+    text-align: center;
+    letter-spacing: 3px;
+}
+
+.menu-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin: 40px 2;
+    padding: 10px;
+   
+}
+
+.desert {
+    height: calc(100vh-20px);
+    position: relative;
+}
+
+.menu-buttons button {
+    padding: 10px 20px;
+    background-color: #fbe43c;
+    color: #000000;
+    border: none;
+    border-radius: 50px;
+    font-size: 16px;
+    cursor: pointer;
+    font-family: 'Bevan', sans-serif;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+}
+
+.menu-buttons button:hover {
+    background-color: #e64a19;
+}
+
+.menu-grid {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 20px;
+
+    justify-items: center; /* Выровнять элементы по центру */
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Три колонки одинаковой ширины */
+    justify-content: center; 
+
+}
+
+.category-block {
+    position: relative;
+    background-size: cover; /* Масштабирует картинку под размер блока */
+    background-position:right; /* Центрирует изображение */
+    background-repeat: no-repeat; /* Изображение не повторяется */
+ /* Отступы вокруг содержимого */
+}
+
+
+
+
+.category-block .category {
+    background-color: #FFB72B; /* Оранжевый фон */
+    color: #000000;
+    text-align: center;
+    margin: 0;
+    font-weight: bold;
+    font-size: 28px
+}
+
+
+.menu-item {
+    font-family: 'Westerland';
+    background-color: #ffe0b2;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.6);
+    text-align: center;
+    font-size: 18px;
+}
+
+.menu-item h3 {
+    margin: 10px 0;
+    font-size: 22px;
+    color: #000000;font-family: 'Westerland';
+    line-height: normal;
+}
+
+.menu-item p {
+    margin: 5px 0;
+}
+
+.menu-item button {
+    font-family: 'Irish Grover';
+    margin-top: 10px;
+    padding: 10px 15px;
+    background-color: #FFB72B;
+    color: #000;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    font-size: 16px;
+}
+
+.menu-item {
+    border: 1px solid #ccc;
+    padding: 30px;
+    border-radius: 40px;
+    background: rgba(0,0,0,0.5) #000000;
+    width: 200px; /* Фиксированная ширина элемента */
+    margin: 50px;
+       
+}
+
+.menu-item h3 {
+    margin: 0 0 10px;
+}
+
+
+.menu-item button:hover {
+    background-color:olive; /* Желтый фон при наведении */
+    color: #000000;
+    transform: scale(1.05);
+}
+
+.logo_img{
+    width: 100px;
+    height: 100px;
+}
+
+.category {
+    font-family: 'Westerland';
+ /* Отступы для категорий */
+    text-align: center; /* Центрируем название категории */
+    font-weight: bold;
+    height: 10px;
+    background-color: #FFB72B;
+    height: 40px;
+    padding: 5px;
+}
+
+.column{
+    font-size: 15px;
+    text-align: center;
+    font-weight: bold;
+}
+.column h1{
+    font-size: 28px;
+    margin: 40px 0 10px; /* Отступы для категорий */
+    text-align: center; /* Центрируем название категории */
+    font-weight: bold;
+}
+
+
+footer {
+    background-color: #000; /* Цвет фона */
+    color: #FFFFFF; /* Цвет текста */
+    font-family: 'Westerland', sans-serif; /* Ваш шрифт */
+    padding: 20px 0;
+    text-align: center;
+    font-weight: lighter;
+}
+
+/* Заголовок */
+.footer-title h1 {
+    background-color: #FFB72B;
+    color: #000000;
+    letter-spacing: 5px;
+    font-size: 40px;
+    font-weight: lighter;
+    padding: 10px 0;
+    margin: 0;
+}
+
+/* Основное содержание footer */
+.footer-content {
+    display: flex;
+    justify-content: space-around; /* Равномерно распределяем блоки */
+    flex-wrap: wrap;
+    margin: 20px 10px;
+}
+
+.footer-section {
+    flex: 1; /* Задаем равные доли для блоков */
+    margin: 10px 20px;
+    min-width: 200px;
+}
+
+.footer-section h2 {
+    font-size: 25px;
+    margin-bottom: 10px;
+    color: #FFB72B; /* Цвет заголовка */
+    text-transform: uppercase;
+}
+
+.footer-section p {
+    margin: 0;
+    line-height: 1.5;
+}
+
+/* Общий стиль для footer */
+.footer-content {
+    display: flex;
+    justify-content: space-around; /* Равномерное расположение блоков */
+    flex-wrap: wrap;
+    margin: 20px 10px;
+    position: relative;
+}
+
+/* Секция "Контакты" */
+.footer-section {
+    flex: 1;
+    margin: 10px 20px;
+    min-width: 200px;
+}
+
+/* Кнопка "В МЕНЮ" */
+.footer-button {
+    position: absolute; /* Абсолютное позиционирование */
+    bottom: -20px; /* Отступ снизу от блока */
+    right: 0; /* Выровнять по правому краю */
+    text-align: center;
+}
+
+.menu_button {
+    display: inline-block;
+    background-color: #555555; /* Серый фон */
+    color: #FFFFFF; /* Белый текст */
+    text-decoration: none;
+    font-family: 'Greca', cursive;
+    font-size: 18px;
+    padding: 10px 20px;
+    border-radius: 30px; /* Скругленные углы */
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+/* Эффекты при наведении */
+.menu_button:hover {
+    background-color: #FFB72B; /* Желтый фон при наведении */
+    color: #000000;
+    transform: scale(1.05);
+}
+
+.hero-section {
+    background-image: url('/static/images/background1.jpg'); /* Укажите путь к вашему изображению */
+    background-size: cover; /* Масштабирование изображения */
+    background-position: center; /* Центрирование изображения */
+    height: 350px; /* Высота фона, включая кнопки */
+    display: flex;
+    flex-direction: column; /* Вертикальное размещение элементов */
+    justify-content: center; /* Центрирование по вертикали */
+    align-items: center; /* Центрирование по горизонтали */
+    text-align: center;
+    padding: 0 20px;
+}
+
+.hero-section h1 {
+    color:#000;
+    font-size: 3rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Тень для читаемости */
+    margin: 0 0 20px; /* Отступ снизу */
+}
+
+.menu-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.menu-buttons button {
+    padding: 10px 20px;
+    background-color: #fbe43c;
+    color: #000;
+    border: none;
+    border-radius: 50px;
+    font-size: 16px;
+    cursor: pointer;
+    font-family: 'Bevan', sans-serif;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.menu-buttons button:hover {
+    background-color: #FFB72B; /* Желтый фон при наведении */
+    color: #000000;
+    transform: scale(1.05);
+}
+
+
+
+/*Захр*/
+
+.nav-item {
+    cursor: pointer;
+}
+
+.popup {
+    display: none; /* Скрыто по умолчанию */
+    position: absolute;
+    top: 60px; /* Позиционирование под навигацией */
+    right: 1px; 
+    background-color: #FFB72B;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 10;
+    padding: 10px;
+    width: 320px;
+    text-align: center;
+    border-radius: 16px;
+}
+
+.popup.active {
+    display: block; /* Показываем при активном классе */
+    font-family: 'Westerland';
+}
+
+#basketContents {
+    max-height: 150px; /* Максимальная высота */
+    overflow-y: auto; /* Прокрутка, если контент превышает высоту */
+}
+
+.popup-item {
+    padding: 10px;
+    cursor: pointer;
+    border-bottom: 1px solid #eee;
+}
+
+.popup-item:hover {
+    background-color: #f0f0f0;
+}
+
+.popup-item:last-child {
+    border-bottom: none;
+}
+
+.overlay {
+    display: none; /* Скрыто по умолчанию */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 5;
+}
+
+.overlay.active {
+    display: block; /* Показываем подложку при активном классе */
+}
+
+.popup.name-basket{
+    font-size: 20px;
+    text-align: center;
+    letter-spacing: 5px;
+}
+
+.basket-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 15px; /* Измените значение отступа здесь */
+}
+
+.item-details {
+    flex-grow: 1;
+    text-align: left; /* Левое выравнивание для описания блюда */
+}
+
+.login-popup, .register-popup {
+    display: none; /* Скрыто по умолчанию */
+    position: fixed;
+    top: 50%; /* Позиционирование под навигацией */
+    left: 50%; /* Центрируем горизонтально */ 
+    border: 1px solid #FFB72B;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 10;
+    padding: 10px;
+    width: 350px;
+    height: 300px;
+    text-align: center;
+    border-radius: 16px;
+    background-color: #FFB72B;
+    transform: translate(-50%, -50%); /* Сдвигаем на 50% ширины и высоты */
+    font-family: 'Westerland';
+}
+
+input {
+    width: 90%;
+    padding: 10px;
+    margin: 10px 0;
+    background-color: #ffd583;
+    border: 1px solid #ffd583;
+    border-radius: 4px;
+    font-size: 16px;
+    transition: border 0.3s;
+    font-family: 'Westerland';
+}
+
+button#checkout{
+    font-family: 'Westerland';
+    background-color:#FFD583;
+    cursor: pointer;
+}
+
+button#checkout:hover{
+    background-color: #FFE61B;
+}
+input::placeholder {
+    color: rgba(0, 0, 0, 0.5); /* Полупрозрачный текст */
+}
+
+.success-message {
+    border: 1px solid yellow;
+    background-color: #fffbe6;
+    padding: 10px;
+    margin-top: 10px;
+    display: none; /* Скрыто по умолчанию */
+}
+
+.registration-link {
+    cursor: pointer;
+    color: black;
+    margin: 10px 0;
+}
+
+.button {
+    padding: 10px 15px;
+    color: black;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: 15px;
+    background-color: #FFD583;
+    font-family: 'Westerland';
+}
+
+.button:hover {
+    background-color: #FFE61B;
+}
+
+/* timozhren */
+
+.image1 {
+    
+    width: 90%;
+    height: 60%;
+    object-fit: cover;
+    border-radius: 20px;
+    
+}
+
+
+/* adaptive     
+
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; 
+}
+
+body {
+    overflow-x: hidden; 
+}
+
+
+@media (max-width: 1200px) {
+    header {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+    }
+    nav {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .menu-grid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 10px;
+        padding: 0 10px; 
+    }
+}
+
+@media (max-width: 768px) {
+    header {
+        padding: 10px;
+    }
+    .logo {
+        margin-right: 0;
+    }
+    nav {
+        flex-direction: column;
+        gap: 5px;
+        margin: 0;
+    }
+    .hero-section {
+        padding: 20px;
+        height: auto;
+    }
+    h1 {
+        font-size: 36px;
+    }
+    .menu-item {
+        width: calc(100% - 20px); 
+        padding: 15px;
+        margin: 20px auto;
+    }
+}
+
+@media (max-width: 480px) {
+    header {
+        padding: 5px;
+    }
+    .logo_img {
+        width: 80px;
+        height: 80px;
+    }
+    nav a {
+        font-size: 16px;
+    }
+    .menu-item {
+        width: calc(100% - 20px); 
+        padding: 10px;
+        margin: 10px auto;
+    }
+    .menu-buttons {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .hero-section h1 {
+        font-size: 28px;
+    }
+    footer {
+        font-size: 14px;
+        padding: 10px;
+    }
+}
+
+*/

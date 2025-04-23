@@ -1,0 +1,171 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static '/css/styles.css' %}">
+    <link rel="stylesheet" href="{% static '/css/auth.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bevan:ital@0;1&family=Irish+Grover&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>Mo's Tacos - Оформление заказа</title>
+</head>
+<body>
+    <header>
+        <img class="logo_img" src="{% static 'images/лого 2-Photoroom 1 (1).png' %}" alt="">
+        <a href="{% url 'index' %}" class="logo-link">
+            <div id='menu' class="logo">Mo's Tacos</div>
+        </a>
+        <nav>
+            <a href="{% url 'cart' %}" class="nav-item" id="basket">КОРЗИНА</a>
+            <a href="#contacts">КОНТАКТЫ</a>
+            {% if user.is_authenticated %}
+            <a href="{% url 'login' %}" class="nav-item" id="login">{{ user.username }}</a>
+            {% else %}
+            <a href="{% url 'login' %}" class="nav-item" id="login">ВХОД</a>
+            {% endif %}
+        </nav>
+    </header>
+
+    <main class="checkout-page">
+        <div class="checkout-container">
+            <h2 class="checkout-title"><i class="fas fa-clipboard-check"></i> Оформление заказа</h2>
+            
+            <div class="checkout-content">
+                <form method="post" class="checkout-form">
+                    {% csrf_token %}
+                    
+                    <div class="form-section">
+                        <h3 class="section-title"><i class="fas fa-truck"></i> Данные доставки</h3>
+                        
+                        <div class="form-group">
+                            <label for="{{ form.delivery_address.id_for_label }}">
+                                <i class="fas fa-map-marker-alt"></i> Адрес доставки:
+                            </label>
+                            <textarea 
+                                name="{{ form.delivery_address.name }}"
+                                id="{{ form.delivery_address.id_for_label }}"
+                                class="form-control"
+                                rows="3"
+                                placeholder="Улица, дом, квартира"
+                                required
+                            >{% if form.delivery_address.value %}{{ form.delivery_address.value }}{% endif %}</textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="{{ form.phone.id_for_label }}">
+                                <i class="fas fa-phone"></i> Телефон:
+                            </label>
+                            <input 
+                                type="text"
+                                name="{{ form.phone.name }}"
+                                id="{{ form.phone.id_for_label }}"
+                                class="form-control"
+                                placeholder="+7 (XXX) XXX-XX-XX"
+                                value="{% if form.phone.value %}{{ form.phone.value }}{% endif %}"
+                                required
+                            >
+                        </div>
+                    </div>
+                    
+                    <div class="form-section">
+                        <h3 class="section-title"><i class="fas fa-credit-card"></i> СПОСОБ ОПЛАТЫ</h3>
+                        
+                        <div class="payment-methods-horizontal">
+                            {% for choice in form.payment_method %}
+                            <label class="payment-option-horizontal">
+                                {{ choice.tag }}
+                                <div class="payment-content">
+                                    {% if choice.choice_label == 'Наличными при получении' %}
+                                        <i class="payment-icon fas fa-money-bill-wave"></i>
+                                        <span>НАЛИЧНЫМИ<br>ПРИ ПОЛУЧЕНИИ</span>
+                                    {% elif choice.choice_label == 'Картой онлайн' %}
+                                        <i class="payment-icon fas fa-credit-card"></i>
+                                        <span>КАРТОЙ<br>ОПЛАЙН</span>
+                                    {% else %}
+                                        <i class="payment-icon fas fa-wallet"></i>
+                                        <span>КАРТОЙ<br>КУРЬЕРУ</span>
+                                    {% endif %}
+                                </div>
+                            </label>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    
+                    <div class="form-section">
+                        <h3 class="section-title"><i class="fas fa-shopping-basket"></i> Ваш заказ</h3>
+                        
+                        <div class="order-summary">
+                            <table class="order-items">
+                                <thead>
+                                    <tr>
+                                        <th>Блюдо</th>
+                                        <th>Кол-во</th>
+                                        <th>Сумма</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for item in cart.items.all %}
+                                    <tr>
+                                        <td>{{ item.dish.name }}</td>
+                                        <td>{{ item.quantity }}</td>
+                                        <td>{{ item.get_total }} ₽</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                                <tfoot>
+                                    <tr class="order-total">
+                                        <td colspan="2"><strong>Итого:</strong></td>
+                                        <td><strong>{{ cart.get_total }} ₽</strong></td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                    
+                    <div class="checkout-actions">
+                        <a href="{% url 'cart' %}" class="back-to-cart-btn">
+                            <i class="fas fa-chevron-left"></i> Вернуться в корзину
+                        </a>
+                        <button type="submit" class="confirm-order-btn">
+                            <i class="fas fa-check-circle"></i> Подтвердить заказ
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div id='contacts' class="footer-title">
+            <h1>ПРИЯТНОГО АППЕТИТА</h1>
+        </div>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h2>АДРЕС:</h2>
+                <p>БОЛЬШАЯ САДОВАЯ., 17,<br>
+                   ВОРОШИЛОВСКИЙ., 1,<br>
+                </p>
+            </div>
+            <div class="footer-section">
+                <h2>ЧАСЫ РАБОТЫ:</h2>
+                <p>ПН-СР 12:00-00:00<br>
+                   ЧТ 12:00-05:00<br>
+                   ПТ-СБ 12:00-06:00<br>
+                   ВС 12:00-00:00</p>
+            </div>
+            <div class="footer-section">
+                <h2>КОНТАКТЫ:</h2>
+                <p>ТЕЛЕФОН: 8-888-888-88-88<br>
+                   EMAIL: MOSTACOS@GMAIL.COM</p>
+            </div>
+            <div class="footer-button">
+                <a href="#menu" class="menu_button">В МЕНЮ ↺</a>
+            </div>
+        </div> 
+    </footer>
+</body>
+</html>

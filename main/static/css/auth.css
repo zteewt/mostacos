@@ -1,0 +1,232 @@
+body {
+    background: linear-gradient(135deg, #FFB72B 0%, #E64A19 100%);
+    background-image: url('../images/Airbrush-bb81e218d8067bf927fce644975082ba\ 2.jpg'); /* текстура */
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+
+/* Обновленный стиль для контейнера */
+.auth-container {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 30px;
+    border-radius: 15px;
+    background-color: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    font-family: 'Westerland';
+}
+
+/* Заголовок формы */
+.auth-container h2 {
+    color: #000;
+    text-align: center;
+    margin-bottom: 25px;
+    font-size: 28px;
+    letter-spacing: 1px;
+}
+
+/* Стили для формы */
+.auth-form {
+    margin-top: 20px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    position: relative;
+    width: 100%; /* Добавьте это */
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #333;
+    font-weight: bold;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px 15px 12px 40px; /* Больше места слева для иконки */
+    border: 2px solid #FFB72B;
+    border-radius: 8px;
+    background-color: #FFF9E6;
+    font-size: 16px;
+    box-sizing: border-box;
+    transition: all 0.3s;
+}
+
+.form-group input:focus {
+    border-color: #E64A19;
+    box-shadow: 0 0 0 3px rgba(230, 74, 25, 0.2);
+    outline: none;
+}
+
+/* Стиль кнопки */
+.btn-primary {
+    width: 100%;
+    padding: 12px;
+    background-color: #E64A19;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin-top: 10px;
+}
+
+.btn-primary:hover {
+    background-color: #FF5722;
+    transform: translateY(-2px);
+}
+
+/* Ссылки */
+.auth-links {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.auth-links a {
+    color: #E64A19;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.auth-links a:hover {
+    color: #FF5722;
+    text-decoration: underline;
+}
+
+/* Ошибки */
+.error {
+    color: #E64A19;
+    font-size: 0.9em;
+    margin-top: 5px;
+    display: block;
+}
+
+.input-with-icon {
+    position: relative;
+}
+
+.input-with-icon i {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #FFB72B;
+    font-size: 16px;
+    width: 20px;
+    text-align: center;
+}
+
+.input-with-icon input {
+    padding-left: 40px !important;
+}
+
+.auth-container {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 480px) {
+    .auth-container {
+        margin: 20px 15px;
+        padding: 20px;
+    }
+    
+    .auth-container h2 {
+        font-size: 24px;
+    }
+}
+
+/* Стили для личного кабинета */
+.account-page {
+    max-width: 800px;
+    margin: 30px auto;
+    padding: 30px;
+    background-color: rgba(255, 255, 255, 0.95);
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    font-family: 'Westerland', sans-serif;
+}
+
+.account-header {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #E64A19;
+    border-bottom: 2px solid #FFB72B;
+    padding-bottom: 15px;
+}
+
+.user-info {
+    background-color: #FFF9E6;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+    border-left: 4px solid #FFB72B;
+}
+
+.user-info p {
+    margin: 10px 0;
+    font-size: 18px;
+}
+
+.user-info strong {
+    color: #E64A19;
+}
+
+.account-actions {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.account-btn {
+    padding: 12px 20px;
+    background-color: #E64A19;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: 'Westerland';
+    font-size: 16px;
+    transition: all 0.3s;
+    flex: 1;
+    text-align: center;
+    text-decoration: none;
+}
+
+.account-btn:hover {
+    background-color: #FF5722;
+    transform: translateY(-2px);
+}
+
+.order-history {
+    margin-top: 30px;
+}
+
+.footer-info {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 2px solid #FFB72B;
+}
+
+.footer-column {
+    margin-bottom: 20px;
+}
+
+.footer-column h3 {
+    color: #E64A19;
+    margin-bottom: 10px;
+}

@@ -1,0 +1,115 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static '/css/styles.css' %}">
+    <link rel="stylesheet" href="{% static '/css/auth.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bevan:ital@0;1&family=Irish+Grover&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>Mo's Tacos</title>
+</head>
+<body>
+    <header>
+        <img class="logo_img" src="{% static 'images/лого 2-Photoroom 1 (1).png' %}" alt="">
+        <a href="{% url 'index' %}" class="logo-link">
+            <div id='menu' class="logo">Mo's Tacos</div>
+        </a>
+        <nav>
+            <a href="{% url 'cart' %}" class="nav-item" id="basket">КОРЗИНА</a>
+            <a href="#contacts">КОНТАКТЫ</a>
+            {% if user.is_authenticated %}
+            <a href="{% url 'login' %}" class="nav-item" id="login">{{ user.username }}</a>
+            {% else %}
+            <a href="{% url 'login' %}" class="nav-item" id="login">ВХОД</a>
+            {% endif %}
+        </nav>
+
+    </header>
+   <main>
+    <div class="orders-page">
+        <div class="orders-header">
+            <h2>История заказов</h2>
+        </div>
+        
+        {% if orders %}
+            <table class="orders-table">
+                <thead>
+                    <tr>
+                        <th><i class="fas fa-hashtag"></i> №</th>
+                        <th><i class="far fa-calendar-alt"></i> Дата</th>
+                        <th><i class="fas fa-info-circle"></i> Статус</th>
+                        <th><i class="fas fa-money-bill-wave"></i> Оплата</th>
+                        <th><i class="fas fa-ruble-sign"></i> Сумма</th>
+                        <th><i class="fas fa-eye"></i> Детали</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for order in orders %}
+                    <tr>
+                        <td>{{ order.id }}</td>
+                        <td>{{ order.created_at|date:"d.m.Y H:i" }}</td>
+                        <td>
+                            <span class="badge 
+                                {% if order.status == 'completed' %}bg-success
+                                {% elif order.status == 'cancelled' %}bg-danger
+                                {% else %}bg-warning{% endif %}">
+                                {{ order.get_status_display }}
+                            </span>
+                        </td>
+                        <td>{{ order.get_payment_method_display }}</td>
+                        <td>{{ order.total_price }} ₽</td>
+                        <td>
+                            <a href="{% url 'order_detail' order.id %}" class="details-btn">
+                                <i class="fas fa-search"></i> Подробнее
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <div class="no-orders">
+                <p>У вас пока нет заказов</p>
+                <a href="{% url 'index' %}" class="account-btn" style="margin-top: 20px;">
+                    Сделать первый заказ
+                </a>
+            </div>
+        {% endif %}
+    </div>
+   </main>
+    <footer>
+        <div id='contacts' class="footer-title">
+            <h1>ПРИЯТНОГО АППЕТИТА</h1>
+        </div>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h2>АДРЕС:</h2>
+                <p>БОЛЬШАЯ САДОВАЯ., 17,<br>
+                   ВОРОШИЛОВСКИЙ., 1,<br>
+                </p>
+            </div>
+            <div class="footer-section">
+                <h2>ЧАСЫ РАБОТЫ:</h2>
+                <p>ПН-СР 12:00-00:00<br>
+                   ЧТ 12:00-05:00<br>
+                   ПТ-СБ 12:00-06:00<br>
+                   ВС 12:00-00:00</p>
+            </div>
+            <div class="footer-section">
+                <h2>КОНТАКТЫ:</h2>
+                <p>ТЕЛЕФОН: 8-888-888-88-88<br>
+                   EMAIL: MOSTACOS@GMAIL.COM</p>
+            </div>
+            <div class="footer-button">
+                <a href="#menu" class="menu_button">В МЕНЮ ↺</a>
+        </div>
+   </div> 
+</footer>
+
+</body>
+</html>
